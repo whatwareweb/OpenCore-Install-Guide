@@ -5,6 +5,11 @@
             "theme":  "night",
             "family": "sans"
         },
+        "addcssjs": {
+          "css": [
+            "build-files/styles/website.css"
+          ]
+        },
         "github-buttons": {
           "buttons": [{
             "user": "dortania",

@@ -27,7 +27,7 @@ Some guidelines when contributing via PRs:
 * Pull Requests can be denied if we feel it does not fit or has inaccurate information. We will generally tell you why it is rejected though or ask for revisions.
   * We would also appreciate sources for any bigger commits to make it easier on us to verify the info your provide is valid
 * Images must be hosted locally in the repo under the `/images/` folder
-* Your PR must be run through a markdown lint and have all issues fixed.
+* Your PR must be ran through a markdown linter and spellchecker (Travis CI will do this for you, but you can do it locally too - see below) and have the build pass.
 * In general, try to avoid using "non-Acidanthera" tools when possible. Generally we want to avoid use of third-party tools  - though if it's impossible otherwise, then you can link it.
   * Tools explicitly banned:
     * UniBeast, MultiBeast and KextBeast
@@ -39,19 +39,15 @@ Some guidelines when contributing via PRs:
 
 ### How to Contribute
 
-Best way to test your commits and make sure they are formatted correctly is downloading `nodejs` and getting the [gitbook-cli](https://github.com/GitbookIO/gitbook-cli) and [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) tools. When you run `gitbook serve`, it will set up a local webserver which you can connect to view the changes you made. `markdownlint *` will throw any errors at you about formatting as well, and `markdownlint -f *` will attempt to fix these.
+Generally contributions are made through PRs (Pull Requests). The best way to test your commits and make sure they are formatted correctly is downloading `nodejs`, cloning the repo (since there are submodules, make sure you use `--recurse-submodules` when cloning, or run `git submodule update --init --recursive` if already cloned), and running `npm install` to install dependencies. Included within the package.json are several tasks for testing, which can be ran with `npm run <task name>`:
 
-* [Fork this repo](https://github.com/dortania/OpenCore-Desktop-Guide/fork/)
-* Install the required tools:
-  * `npm install -g markdownlint-cli`
-  * `npm install -g gitbook-cli`
-* Make your changes.
-* Build the site:
-  * `gitbook install` (To install all the required gitbook plugins)
-  * `gitbook serve` (Preview the site)
-    * Can be found at `http://localhost:4000`
-* Check markdown format:
-  * `markdownlint -f *` (To fix any potential issues)
+* `npm run build` - Install GitBook (and dependencies) and build the guide
+* `npm run serve` - Install GitBook (and dependencies), build the guide, and set up a local webserver to view the guide
+* `npm run spellcheck` - Check spelling through spellchecker-cli
+* `npm run lint` - Run repository through markdownlint-cli
+* `npm run test` - runs both of the above tests
+* `npm run fix-lint` - attempt to fix lint issues
+* `npm run sort-dict` - sort dictionary.txt
 
 ### Tips
 

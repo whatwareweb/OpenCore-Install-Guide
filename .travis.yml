@@ -2,22 +2,28 @@ language: node_js
 node_js: node
 cache:
   npm: false
-before_script:
-- npm install -g gitbook-cli
-script: 
-- gitbook install
-- gitbook build
-- cp icons/* _book/gitbook/images
-deploy:
-  local_dir: _book
-  provider: pages
-  skip_cleanup: true
-  name: Travis Build Bot
-  keep_history: true
-  on:
-    branch: master
-  target_branch: gh-pages
-  # committer_from_gh: true
-  # allow_empty_commit: true
-  github_token:
-    secure: Gw45nZAA88ecruWBTECU5B3BdlHIJNbxaaf8ZTPVxKjPM8xPdgs0ENTZmE6oSQCwTk3ozM+eTjUuJ6VQVrFjV6XpEzMcaxaajay8LUiMA8ma3Z5MNQahFizoPSAUdU0Rk6badGrHFv+BNMVhF7WTboUGwJ21wSs0n5Nm0ODL2AMz4ls2163jiRY7g8eHo6qsSuupawD1zLpLfZrW5i5jSEo1Z+t2T2GhWnuXzoC+S2tv8KWhyOt0SCeomeV1RpyjiyqZinTt3I5gtAj2ymXFoun9FLYvqlaQYfpomXP1EZQVV17kc7BjHpr1wSKKUtGgrQ2WS4PYPxP9Sa7AZlXs+1WGZ1aoM560Ju5o203FMJd7ZSNbBr+44bxiPWhz3h+xszIMJp0NcW25R12Yh7Hyw7KqH1nDNvXXbiC7u65sOIDyQn9S2vQtdpz0F5GfbOEYy761i+GSRxr7kKi0mAfi/P6zI2RtfwSW1AOyppncYVeI9d7TLuIVQ8nWdftoS+oE/N2XW4IlypLaAaG8nPyQKVGiB7fR/8KuSp4Nht0aNCOFk2UwggND6EN3YobH+AnZWN5q6c2/G/MYK68xeQ5xgH20c8+rdjZQArnfvadx23EAOBnP2246X5r1XL24Yo3cWx0VwlbFc9BbXC4JyxKweSlUV4s2dVhp88hu3EGWeto=
+jobs:
+  include:
+    - name: "Build and Push"
+      script: 
+      - npm run build
+      - cp icons/* _book/gitbook/images
+      deploy:
+        local_dir: _book
+        provider: pages
+        skip_cleanup: true
+        name: Travis Build Bot
+        keep_history: true
+        on:
+          branch: master
+        target_branch: gh-pages
+        # committer_from_gh: true
+        # allow_empty_commit: true
+        token:
+          secure: Gw45nZAA88ecruWBTECU5B3BdlHIJNbxaaf8ZTPVxKjPM8xPdgs0ENTZmE6oSQCwTk3ozM+eTjUuJ6VQVrFjV6XpEzMcaxaajay8LUiMA8ma3Z5MNQahFizoPSAUdU0Rk6badGrHFv+BNMVhF7WTboUGwJ21wSs0n5Nm0ODL2AMz4ls2163jiRY7g8eHo6qsSuupawD1zLpLfZrW5i5jSEo1Z+t2T2GhWnuXzoC+S2tv8KWhyOt0SCeomeV1RpyjiyqZinTt3I5gtAj2ymXFoun9FLYvqlaQYfpomXP1EZQVV17kc7BjHpr1wSKKUtGgrQ2WS4PYPxP9Sa7AZlXs+1WGZ1aoM560Ju5o203FMJd7ZSNbBr+44bxiPWhz3h+xszIMJp0NcW25R12Yh7Hyw7KqH1nDNvXXbiC7u65sOIDyQn9S2vQtdpz0F5GfbOEYy761i+GSRxr7kKi0mAfi/P6zI2RtfwSW1AOyppncYVeI9d7TLuIVQ8nWdftoS+oE/N2XW4IlypLaAaG8nPyQKVGiB7fR/8KuSp4Nht0aNCOFk2UwggND6EN3YobH+AnZWN5q6c2/G/MYK68xeQ5xgH20c8+rdjZQArnfvadx23EAOBnP2246X5r1XL24Yo3cWx0VwlbFc9BbXC4JyxKweSlUV4s2dVhp88hu3EGWeto=
+    - name: "Lint"
+      script: 
+      - npm run lint-ci
+    - name: "Spellcheck"
+      script: 
+      - npm run spellcheck
