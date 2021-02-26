@@ -27,6 +27,7 @@
 19H
 19h
 1Revenger1
+20D75
 20XX
 2200S
 2B-i
@@ -133,6 +134,7 @@ AppleSMBusPCI
 AppleSupport
 AppleSupportPkg
 AppleTV
+AppleUSBHostPort
 Aptio
 AptioMemoryFix
 Aquantia
@@ -952,6 +954,7 @@ config's
 configs
 configurator
 configurators
+createDevice
 createinstallmedia
 csr-active-config
 csrstat
